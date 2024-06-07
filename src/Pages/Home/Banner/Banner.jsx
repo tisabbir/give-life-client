@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import PrimaryBtn from "../../../Components/PrimaryButton/PrimaryBtn";
 import SecondaryBtn from "../../../Components/SecondaryButton/SecondaryBtn";
 import banner from "../../../assets/banner.png";
@@ -20,7 +21,7 @@ const Banner = () => {
               cause. Together, we can ensure a healthier tomorrow for everyone.
             </p>
           <div className="flex gap-4 flex-col md:flex-row justify-center items-center">
-          <PrimaryBtn btnText={'Join As A Donor'} />
+         <Link to={'/register'}> <PrimaryBtn btnText={'Join As A Donor'} /></Link>
            <SecondaryBtn btnText="Search Donors" />
           </div>
           </div>

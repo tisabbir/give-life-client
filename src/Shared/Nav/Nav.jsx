@@ -2,7 +2,7 @@ import { Link, NavLink } from "react-router-dom";
 import PrimaryBtn from "../../Components/PrimaryButton/PrimaryBtn";
 
 const Nav = () => {
-  const user = true;
+  const user = false;
   const navbar = (
     <>
       <li>
@@ -68,7 +68,7 @@ const Nav = () => {
     </>
   );
   return (
-    <div className="w-full fixed">
+    <div className="w-full fixed z-50">
       <div className="navbar bg-base-100">
         <div className="navbar-start">
           <div className="dropdown">

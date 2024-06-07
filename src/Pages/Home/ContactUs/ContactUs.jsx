@@ -4,7 +4,7 @@ import contactUs from '../../../assets/contactUs.jpg'
 
 const ContactUs = () => {
   return (
-    <div className="mt-24">
+    <div className="mt-24 z-0">
         <SectionTitle subHeading={"Communicate With Us"} Heading={'Contact Us'} />
       <div className="hero  mt-12">
         <div className="hero-content grid grid-cols-1 lg:grid-cols-2 gap-4">
