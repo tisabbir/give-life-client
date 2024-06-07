@@ -3,7 +3,7 @@ import SecondaryBtn from "../../../Components/SecondaryButton/SecondaryBtn";
 import banner from "../../../assets/banner.png";
 const Banner = () => {
   return (
-    <div>
+    <div className="pt-24">
       <div
         className="hero h-96 bg-fixed"
         style={{
