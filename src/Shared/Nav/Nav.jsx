@@ -1,8 +1,9 @@
 import { Link, NavLink } from "react-router-dom";
 import PrimaryBtn from "../../Components/PrimaryButton/PrimaryBtn";
+import useAuth from "../../Hooks/useAuth";
 
 const Nav = () => {
-  const user = false;
+  const {user} = useAuth();
   const navbar = (
     <>
       <li>
@@ -110,7 +111,7 @@ const Nav = () => {
                 <details className="dropdown">
                   <summary className="m-1 avatar">
                     <div className="w-12 rounded-full">
-                      <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                      <img src={user.photoURL} />
                     </div>
                   </summary>
                   <ul className="-ml-24 shadow menu dropdown-content z-[10] bg-base-100 rounded-box w-36">

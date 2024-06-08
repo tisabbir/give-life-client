@@ -3,10 +3,12 @@ import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import registerPicture from "../../assets/register.jpg";
 import { useEffect, useState } from "react";
+import useAuth from "../../Hooks/useAuth";
 
 const Register = () => {
   const [districts, setDistricts] = useState([]);
-  const [upozillas, setUpozillas] = useState([]);
+  const [upozilas, setUpozilas] = useState([]);
+  const { createUser, updateUserProfile } = useAuth();
 
   useEffect(() => {
     fetch("districts.json")
@@ -20,7 +22,7 @@ const Register = () => {
     fetch("upozillas.json")
       .then((res) => res.json())
       .then((data) => {
-        setUpozillas(data[2].data);
+        setUpozilas(data[2].data);
       });
   }, []);
 
@@ -29,11 +31,14 @@ const Register = () => {
     const form = e.target;
     const name = form.name.value;
     const email = form.email.value;
-    const avatarUrl = form.url.value;
+    const avatarUrl = form.url.value || `https://picsum.photos/id/${Math.floor(Math.random()*200)}/200/300`;
     const password = form.password.value;
     const confirmPassword = form.confirmPassword.value;
     const district = form.district.value;
-    const upozilla = form.upozilla.value;
+    const upozila = form.upozila.value;
+    const blood = form.blood.value;
+    const role = "donor";
+    const status = "active";
 
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
     if (!passwordRegex.test(password)) {
@@ -47,7 +52,49 @@ const Register = () => {
       });
       return;
     }
-    console.log(name, email, avatarUrl, district,  upozilla, password, confirmPassword);
+
+    if (password !== confirmPassword) {
+      Swal.fire({
+        title: "Error",
+        text: "The Password and Confirm Password Did not matched.",
+        imageUrl: "https://i.ibb.co/TRYVL4g/error.jpg",
+        imageWidth: 200,
+        imageHeight: 200,
+        imageAlt: "Custom image",
+      });
+      return;
+    }
+    console.log(
+      name,
+      email,
+      avatarUrl,
+      district,
+      upozila,
+      blood,
+      role, 
+      status,
+      password,
+      confirmPassword
+    );
+
+    createUser(email, password)
+      .then((res) => {
+        console.log(res.user);
+        updateUserProfile(name, avatarUrl)
+        .then(() => {
+            Swal.fire({
+                title: "Success",
+                text: "Profile Updated",
+                imageUrl: "https://i.ibb.co/TRYVL4g/error.jpg",
+                imageWidth: 200,
+                imageHeight: 200,
+                imageAlt: "Custom image",
+              });
+        })
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
@@ -65,7 +112,10 @@ const Register = () => {
             <h1 className="text-center mt-4 text-2xl font-bold">
               Register Now
             </h1>
-            <form onSubmit={handleRegister} className="card-body grid grid-cols-1 lg:grid-cols-2 justify-center items-center">
+            <form
+              onSubmit={handleRegister}
+              className="card-body grid grid-cols-1 lg:grid-cols-2 justify-center items-center"
+            >
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Name</span>
@@ -99,18 +149,40 @@ const Register = () => {
                   placeholder="Avatar URL"
                   name="url"
                   className="input input-bordered"
-                  required
                 />
               </div>
 
               <div className="form-control">
                 <label className="label">
+                  <span className="label-text">Blood Group</span>
+                </label>
+                <select
+                  defaultValue={"Choose your blood group"}
+                  name="blood"
+                  className="select select-bordered w-full max-w-xs"
+                >
+                  <option disabled>Choose your blood group</option>
+
+                  <option>A+</option>
+                  <option>A-</option>
+                  <option>B+</option>
+                  <option>B-</option>
+                  <option>AB+</option>
+                  <option>AB-</option>
+                  <option>O+</option>
+                  <option>O-</option>
+                </select>
+              </div>
+              <div className="form-control">
+                <label className="label">
                   <span className="label-text">District</span>
                 </label>
-                <select name="district" className="select select-bordered w-full max-w-xs">
-                  <option disabled selected>
-                    Choose your district
-                  </option>
+                <select
+                  defaultValue={"Choose your district"}
+                  name="district"
+                  className="select select-bordered w-full max-w-xs"
+                >
+                  <option disabled>Choose your district</option>
                   {districts.map((district) => (
                     <option key={district.id}>{district.name}</option>
                   ))}
@@ -119,14 +191,16 @@ const Register = () => {
 
               <div className="form-control">
                 <label className="label">
-                  <span className="label-text">Upozilla</span>
+                  <span className="label-text">Upozila</span>
                 </label>
-                <select name="upozilla" className="select select-bordered w-full max-w-xs">
-                  <option disabled selected>
-                    Choose your Upozilla
-                  </option>
-                  {upozillas.map((upozilla) => (
-                    <option key={upozilla.id}>{upozilla.name}</option>
+                <select
+                  defaultValue={"Choose your upozila"}
+                  name="upozila"
+                  className="select select-bordered w-full max-w-xs"
+                >
+                  <option disabled>Choose your Upozila</option>
+                  {upozilas.map((upozila) => (
+                    <option key={upozila.id}>{upozila.name}</option>
                   ))}
                 </select>
               </div>
@@ -157,19 +231,17 @@ const Register = () => {
               </div>
 
               <div className="form-control mt-6">
-                
-
                 <button className="btn bg-[#9B111E] text-white mt-3">
                   Register
                 </button>
               </div>
             </form>
             <h1 className="text-center mb-2">
-                  Already a member of us?{" "}
-                  <Link to={"/login"} className="text-blue-500">
-                    Login Now
-                  </Link>
-                </h1>
+              Already a member of us?{" "}
+              <Link to={"/login"} className="text-blue-500">
+                Login Now
+              </Link>
+            </h1>
           </div>
         </div>
       </div>
