@@ -61,11 +61,11 @@ const Register = () => {
             <img className="max-w-lg rounded-lg" src={registerPicture} />
           </div>
 
-          <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+          <div className="card shrink-0 w-full flex-1 shadow-2xl bg-base-100">
             <h1 className="text-center mt-4 text-2xl font-bold">
               Register Now
             </h1>
-            <form onSubmit={handleRegister} className="card-body">
+            <form onSubmit={handleRegister} className="card-body grid grid-cols-1 lg:grid-cols-2 justify-center items-center">
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Name</span>
@@ -157,18 +157,19 @@ const Register = () => {
               </div>
 
               <div className="form-control mt-6">
-                <h1 className="text-center mb-2">
+                
+
+                <button className="btn bg-[#9B111E] text-white mt-3">
+                  Register
+                </button>
+              </div>
+            </form>
+            <h1 className="text-center mb-2">
                   Already a member of us?{" "}
                   <Link to={"/login"} className="text-blue-500">
                     Login Now
                   </Link>
                 </h1>
-
-                <button className="btn bg-[#9B111E] text-white">
-                  Register
-                </button>
-              </div>
-            </form>
           </div>
         </div>
       </div>
