@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 
 const Register = () => {
   const [districts, setDistricts] = useState([]);
-//   const [upozillas, setUpozillas] = useState([]);
+  const [upozillas, setUpozillas] = useState([]);
 
   useEffect(() => {
     fetch("districts.json")
@@ -20,7 +20,7 @@ const Register = () => {
     fetch("upozillas.json")
       .then((res) => res.json())
       .then((data) => {
-        console.log(data[2].data);
+        setUpozillas(data[2].data);
       });
   }, []);
 
@@ -31,6 +31,9 @@ const Register = () => {
     const email = form.email.value;
     const avatarUrl = form.url.value;
     const password = form.password.value;
+    const confirmPassword = form.confirmPassword.value;
+    const district = form.district.value;
+    const upozilla = form.upozilla.value;
 
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
     if (!passwordRegex.test(password)) {
@@ -44,7 +47,7 @@ const Register = () => {
       });
       return;
     }
-    console.log(name, email, avatarUrl);
+    console.log(name, email, avatarUrl, district,  upozilla, password, confirmPassword);
   };
 
   return (
@@ -104,7 +107,7 @@ const Register = () => {
                 <label className="label">
                   <span className="label-text">District</span>
                 </label>
-                <select className="select select-bordered w-full max-w-xs">
+                <select name="district" className="select select-bordered w-full max-w-xs">
                   <option disabled selected>
                     Choose your district
                   </option>
@@ -118,12 +121,12 @@ const Register = () => {
                 <label className="label">
                   <span className="label-text">Upozilla</span>
                 </label>
-                <select className="select select-bordered w-full max-w-xs">
+                <select name="upozilla" className="select select-bordered w-full max-w-xs">
                   <option disabled selected>
                     Choose your Upozilla
                   </option>
-                  {districts.map((district) => (
-                    <option key={district.id}>{district.name}</option>
+                  {upozillas.map((upozilla) => (
+                    <option key={upozilla.id}>{upozilla.name}</option>
                   ))}
                 </select>
               </div>
@@ -161,7 +164,7 @@ const Register = () => {
                   </Link>
                 </h1>
 
-                <button className="btn bg-green-500 text-white">
+                <button className="btn bg-[#9B111E] text-white">
                   Register
                 </button>
               </div>
