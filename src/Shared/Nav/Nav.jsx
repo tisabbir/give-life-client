@@ -4,6 +4,17 @@ import useAuth from "../../Hooks/useAuth";
 
 const Nav = () => {
   const {user} = useAuth();
+  const {logOut} = useAuth();
+  const handleLogOut = () => {
+    logOut()
+    .then(()=>{
+      console.log("Logged Out");
+    })
+    .catch(err => {
+      console.log(err);
+    })
+  }
+
   const navbar = (
     <>
       <li>
@@ -119,7 +130,7 @@ const Nav = () => {
                       <Link to={"/dashboard"}>Dashboard</Link>
                     </li>
                     <li>
-                      <button>Logout</button>
+                      <button onClick={handleLogOut}>Logout</button>
                     </li>
                   </ul>
                 </details>
