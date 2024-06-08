@@ -2,18 +2,27 @@ import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import registerPicture from "../../assets/register.jpg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Register = () => {
+  const [districts, setDistricts] = useState([]);
+//   const [upozillas, setUpozillas] = useState([]);
 
-    const [districts, setDistricts] = useState([]);
+  useEffect(() => {
+    fetch("districts.json")
+      .then((res) => res.json())
+      .then((data) => {
+        setDistricts(data[2].data);
+      });
+  }, []);
 
-    fetch('districts.json')
-    .then(res => res.json())
-    .then(data => {
-        
-        setDistricts(data[2].data)
-    })
+  useEffect(() => {
+    fetch("upozillas.json")
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data[2].data);
+      });
+  }, []);
 
   const handleRegister = (e) => {
     e.preventDefault();
@@ -99,9 +108,23 @@ const Register = () => {
                   <option disabled selected>
                     Choose your district
                   </option>
-                  {
-                    districts.map(district => <option key={district.id}>{district.name}</option> )
-                  }
+                  {districts.map((district) => (
+                    <option key={district.id}>{district.name}</option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Upozilla</span>
+                </label>
+                <select className="select select-bordered w-full max-w-xs">
+                  <option disabled selected>
+                    Choose your Upozilla
+                  </option>
+                  {districts.map((district) => (
+                    <option key={district.id}>{district.name}</option>
+                  ))}
                 </select>
               </div>
 
@@ -116,7 +139,6 @@ const Register = () => {
                   className="input input-bordered"
                   required
                 />
-                
               </div>
               <div className="form-control">
                 <label className="label">
@@ -129,9 +151,7 @@ const Register = () => {
                   className="input input-bordered"
                   required
                 />
-               
               </div>
-
 
               <div className="form-control mt-6">
                 <h1 className="text-center mb-2">
