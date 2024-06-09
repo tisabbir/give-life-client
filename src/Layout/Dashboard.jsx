@@ -1,11 +1,39 @@
 import { FaPerson } from "react-icons/fa6";
+import { IoIosAddCircle } from "react-icons/io";
 import { NavLink, Outlet } from "react-router-dom";
 
 const Dashboard = () => {
   return (
     <div className="flex flex-col md:flex-row">
-      <div className="w-full md:w-64 pt-24 pl-6 bg-[#9B111E] pb-4 text-white md:min-h-screen">
-        <NavLink to={'/dashboard/profile'} className='flex items-center gap-1 '> <FaPerson /> Profile</NavLink>
+      <div className="w-full md:w-80 pt-24 px-2 bg-[#9B111E] pb-4 text-white md:min-h-screen space-y-2">
+        <NavLink
+          style={({ isActive }) => {
+            return {
+              fontWeight: isActive ? "bold" : "",
+              color: isActive ? "#9B111E" : "white",
+              backgroundColor: isActive ? "white" : "",
+            };
+          }}
+          to={"/dashboard/profile"}
+          className="btn btn-ghost flex justify-start items-center gap-1 "
+        >
+          {" "}
+          <FaPerson /> Profile
+        </NavLink>
+        <NavLink
+          style={({ isActive }) => {
+            return {
+              fontWeight: isActive ? "bold" : "",
+              color: isActive ? "#9B111E" : "white",
+              backgroundColor: isActive ? "white" : "",
+            };
+          }}
+          to={"/dashboard/create-donation-request"}
+          className=" btn btn-ghost flex justify-start items-center gap-1 "
+        >
+          {" "}
+          <IoIosAddCircle /> Create Donation Request
+        </NavLink>
       </div>
       <div className="pt-24 w-full">
         <Outlet />
