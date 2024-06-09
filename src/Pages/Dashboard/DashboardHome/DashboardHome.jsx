@@ -4,6 +4,10 @@ import SectionTitle from "../../../Components/SectionTitle/SectionTitle";
 import useAuth from "../../../Hooks/useAuth";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
+import { MdCancel } from "react-icons/md";
+import { IoCheckmarkDoneCircle } from "react-icons/io5";
+import PrimaryBtn from "../../../Components/PrimaryButton/PrimaryBtn";
+import { Link } from "react-router-dom";
 
 const DashboardHome = () => {
   const { user } = useAuth();
@@ -58,8 +62,8 @@ const DashboardHome = () => {
                             hour: 'numeric',
                             minute: 'numeric',
                           })}</td>
-                          <td>{item.donationStatus}</td>
-                          <td>{user.displayName}, {user.email} </td>
+                          <td className="flex items-center gap-2">{item.donationStatus} { item.donationStatus === 'inprogress' ?  <div className="flex justify-center items-center gap-2"><MdCancel  className="text-center text-xl text-[#9B111E] hover:text-black "  /> <IoCheckmarkDoneCircle  className="text-center text-xl hover:text-[#9B111E]" /></div>  : ''} </td>
+                          <td>{ item.donationStatus === 'inprogress' ? <>{user.displayName + ", " + user.email}</> : <></> } </td>
                           <td> <FaPenToSquare className="text-center text-xl hover:text-[#9B111E]" /> </td>
                           <td><FaTrash  className="text-center text-xl text-[#9B111E] hover:text-black" /></td>
                           <td><FaAddressBook className="text-center text-xl hover:text-[#9B111E]" /> </td>
@@ -70,6 +74,8 @@ const DashboardHome = () => {
                
               </table>
             </div>
+
+           <Link to={'/dashboard/my-donation-requests'} className="w-full flex justify-center mt-12"> <PrimaryBtn className='' btnText={'View my all request'} /></Link>
           </div> 
           : 
           <></>
