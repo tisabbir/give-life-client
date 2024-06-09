@@ -3,12 +3,15 @@ import useAuth from "../../../Hooks/useAuth";
 import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 
 const CreateDonationRequest = () => {
   const { user } = useAuth();
   const [districts, setDistricts] = useState([]);
   const [upozilas, setUpozilas] = useState([]);
   const [startDate, setStartDate] = useState(new Date());
+  const axiosSecure = useAxiosSecure();
 
   useEffect(() => {
     fetch("../../../../public/districts.json")
@@ -40,8 +43,7 @@ const CreateDonationRequest = () => {
     const requestMessage = form.message.value;
     const donationStatus = 'pending';
 
-    console.log(
-
+    const donationRequest = {
         requesterName,
         requesterEmail,
         recipientName,
@@ -52,7 +54,29 @@ const CreateDonationRequest = () => {
         donationDateAndTime,
         requestMessage,
         donationStatus
-    );
+    }
+
+    console.log(donationRequest);
+
+    axiosSecure.post('/donationRequests', donationRequest)
+    .then(res => {
+        console.log(res.data);
+
+        if(res.data.insertedId){
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Your donation request has been added",
+                showConfirmButton: false,
+                timer: 1500
+              });
+        }
+        
+    })
+    .catch(err => {
+        console.log(err);
+    })
+
   }
 
 
