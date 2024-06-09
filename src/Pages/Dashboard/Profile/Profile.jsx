@@ -5,6 +5,8 @@ import SectionTitle from "../../../Components/SectionTitle/SectionTitle";
 import { FaPenToSquare } from "react-icons/fa6";
 import { useState } from "react";
 import Swal from "sweetalert2";
+import { updateProfile } from "firebase/auth";
+import auth from "../../../firebase/firebase.config";
 
 const Profile = () => {
   const axiosSecure = useAxiosSecure();
@@ -47,6 +49,18 @@ const Profile = () => {
     .then(res => {
         console.log(res.data);
         if(res.data.modifiedCount>0){
+
+            updateProfile(auth.currentUser, {
+                displayName: updatedName,
+                photoURL: updatedPhoto,
+              }).then(() => {
+                // Profile updated!
+                console.log('profile updated in firebase');
+              }).catch((error) => {
+                // An error occurred
+                console.log(error);
+              });
+
             Swal.fire({
                 position: "top-end",
                 icon: "success",

@@ -26,6 +26,35 @@ const CreateDonationRequest = () => {
       });
   }, []);
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const requesterName = user.displayName;
+    const requesterEmail = user.email;
+    const recipientName = form.name.value;
+    const recipientDistrict = form.district.value;
+    const recipientUpozila = form.upozila.value;
+    const hospital = form.hospital.value;
+    const address = form.address.value;
+    const donationDateAndTime = startDate;
+    const requestMessage = form.message.value;
+    const donationStatus = 'pending';
+
+    console.log(
+
+        requesterName,
+        requesterEmail,
+        recipientName,
+        recipientDistrict,
+        recipientUpozila,
+        hospital,
+        address,
+        donationDateAndTime,
+        requestMessage,
+        donationStatus
+    );
+  }
+
 
   return (
     <div>
@@ -35,7 +64,7 @@ const CreateDonationRequest = () => {
             <h1 className="text-center mt-4 text-2xl font-bold">
               Create Donation Request
             </h1>
-            <form className="card-body grid grid-cols-1 md:grid-cols-2 justify-center items-center">
+            <form onSubmit={handleSubmit} className="card-body grid grid-cols-1 md:grid-cols-2 justify-center items-center">
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Requester Name</span>
@@ -126,7 +155,7 @@ const CreateDonationRequest = () => {
                 <input
                   type="text"
                   placeholder="Full Address"
-                  name="fullAddress"
+                  name="address"
                   className="input input-bordered"
                 />
               </div>
