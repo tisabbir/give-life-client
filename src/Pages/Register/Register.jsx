@@ -36,7 +36,7 @@ const Register = () => {
     const email = form.email.value;
     const avatarUrl =
       form.url.value ||
-      `https://picsum.photos/id/${Math.floor(Math.random() * 200)}/200/300`;
+      `https://picsum.photos/id/${Math.floor(Math.random() * 200)}/300/300`;
     const password = form.password.value;
     const confirmPassword = form.confirmPassword.value;
     const district = form.district.value;
