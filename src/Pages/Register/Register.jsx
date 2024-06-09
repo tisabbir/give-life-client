@@ -1,14 +1,17 @@
 import { Helmet } from "react-helmet";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import registerPicture from "../../assets/register.jpg";
 import { useEffect, useState } from "react";
 import useAuth from "../../Hooks/useAuth";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
 const Register = () => {
   const [districts, setDistricts] = useState([]);
   const [upozilas, setUpozilas] = useState([]);
   const { createUser, updateUserProfile } = useAuth();
+  const axiosPublic = useAxiosPublic();
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch("districts.json")
@@ -31,7 +34,9 @@ const Register = () => {
     const form = e.target;
     const name = form.name.value;
     const email = form.email.value;
-    const avatarUrl = form.url.value || `https://picsum.photos/id/${Math.floor(Math.random()*200)}/200/300`;
+    const avatarUrl =
+      form.url.value ||
+      `https://picsum.photos/id/${Math.floor(Math.random() * 200)}/200/300`;
     const password = form.password.value;
     const confirmPassword = form.confirmPassword.value;
     const district = form.district.value;
@@ -64,33 +69,43 @@ const Register = () => {
       });
       return;
     }
-    console.log(
+
+    const userInfo = {
       name,
       email,
       avatarUrl,
       district,
       upozila,
       blood,
-      role, 
+      role,
       status,
       password,
-      confirmPassword
-    );
+      confirmPassword,
+    };
 
     createUser(email, password)
       .then((res) => {
         console.log(res.user);
-        updateUserProfile(name, avatarUrl)
-        .then(() => {
-            Swal.fire({
-                title: "Success",
-                text: "Profile Updated",
-                imageUrl: "https://i.ibb.co/TRYVL4g/error.jpg",
-                imageWidth: 200,
-                imageHeight: 200,
-                imageAlt: "Custom image",
-              });
-        })
+        updateUserProfile(name, avatarUrl).then(() => {
+          axiosPublic
+            .post("/users", userInfo)
+            .then((res) => {
+              if (res.data.insertedId) {
+                Swal.fire({
+                  title: "Success",
+                  text: "Profile Updated",
+                  imageUrl: "https://i.ibb.co/TRYVL4g/error.jpg",
+                  imageWidth: 200,
+                  imageHeight: 200,
+                  imageAlt: "Custom image",
+                });
+                navigate("/");
+              }
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        });
       })
       .catch((err) => {
         console.log(err);
