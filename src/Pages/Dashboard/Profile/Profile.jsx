@@ -4,13 +4,14 @@ import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import SectionTitle from "../../../Components/SectionTitle/SectionTitle";
 import { FaPenToSquare } from "react-icons/fa6";
 import { useState } from "react";
+import Swal from "sweetalert2";
 
 const Profile = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
   const [editable, setEditable] = useState(false);
 
-  const { data: userInfo = {} } = useQuery({
+  const { data: userInfo = {}, refetch } = useQuery({
     queryKey: ["user"],
     queryFn: async () => {
       const res = await axiosSecure.get(`/users/${user.email}`);
@@ -23,14 +24,109 @@ const Profile = () => {
   const handleEdit = () => {
     setEditable(true);
   };
+  const handleSave = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const updatedName = form.name.value;
+    const updatedDistrict = form.district.value;
+    const updatedUpozila = form.upozila.value;
+    const updatedBlood = form.blood.value;
+    const updatedPhoto = form.photo.value;
+
+    
+
+    const updatedUser = {
+      updatedName,
+      updatedPhoto,
+      updatedDistrict,
+      updatedUpozila,
+      updatedBlood,
+    };
+
+    axiosSecure.patch(`/users/${email}`, updatedUser)
+    .then(res => {
+        console.log(res.data);
+        if(res.data.modifiedCount>0){
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Your profile has been updated",
+                showConfirmButton: false,
+                timer: 1500
+              });
+    
+              setEditable(false);
+              refetch();
+        }
+    })
+    .catch(err => {
+        console.log(err);
+    })
+  };
 
   return (
     <div className="mb-12">
       <SectionTitle Heading={"User Profile"} subHeading={name} />
 
-      {editable ? 
-      (
-        <div> editable </div>
+      {editable ? (
+        <div className="card w-96 bg-base-100 shadow-xl mx-auto mt-4">
+          <div className="flex  justify-end"></div>
+          <figure className="px-10 pt-10">
+            <img src={avatarUrl} alt="Shoes" className="rounded-full" />
+          </figure>
+          <div className="card-body items-center text-left">
+            <form onSubmit={handleSave} className="space-y-4">
+              <p className="flex justify-between items-center">
+                Email : <span>{email}</span>{" "}
+              </p>
+              <p className="flex justify-between items-center">
+                Name :
+                <input
+                  name="name"
+                  defaultValue={name}
+                  className="input input-sm border-2 border-gray-200 ml-4 "
+                />
+              </p>
+              <p className="flex justify-between items-center">
+                Picture :
+                <input
+                  name="photo"
+                  defaultValue={avatarUrl}
+                  className="input input-sm border-2 border-gray-200 ml-4 "
+                />
+              </p>
+              <p className="flex justify-between items-center">
+                District :{" "}
+                <input
+                  name="district"
+                  defaultValue={district}
+                  className="input input-sm border-2 border-gray-200 ml-4"
+                />
+              </p>
+              <p className="flex justify-between items-center">
+                Upozila :{" "}
+                <input
+                  name="upozila"
+                  defaultValue={upozila}
+                  className="input input-sm border-2 border-gray-200 ml-4"
+                />{" "}
+              </p>
+              <p className="flex justify-between items-center">
+                Blood Group :{" "}
+                <input
+                  name="blood"
+                  defaultValue={blood}
+                  className="input input-sm border-2 border-gray-200 ml-4"
+                />{" "}
+              </p>
+              <input
+                className="btn bg-[#9B111E] text-white w-full"
+                type="submit"
+                value={"Save"}
+              />
+            </form>
+          </div>
+        </div>
       ) : (
         <div className="card w-96 bg-base-100 shadow-xl mx-auto mt-4">
           <div className="flex  justify-end">
