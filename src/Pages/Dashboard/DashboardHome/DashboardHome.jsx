@@ -59,14 +59,16 @@ const DashboardHome = () => {
             axiosSecure.delete(`/donationRequests/${id}`)
             .then(res => {
                 console.log(res.data);
+                if(res.data.deletedCount > 0){
 
-                Swal.fire({
-                    title: "Deleted!",
-                    text: "Your file has been deleted.",
-                    icon: "success"
-                  });
-
-                refetch();
+                    Swal.fire({
+                        title: "Deleted!",
+                        text: "Your file has been deleted.",
+                        icon: "success"
+                      });
+    
+                    refetch();
+                }
         
             })
             .catch(err => {
@@ -143,8 +145,7 @@ const DashboardHome = () => {
                       )}{" "}
                     </td>
                     <td>
-                      {" "}
-                      <FaPenToSquare className="text-center text-xl hover:text-[#9B111E]" />{" "}
+                      <Link to={`/dashboard/updateRequest/${item._id}`}><FaPenToSquare className="text-center text-xl hover:text-[#9B111E]" /></Link>
                     </td>
                     <td>
                       <FaTrash onClick={()=>handleDelete(item._id)} className="text-center text-xl text-[#9B111E] hover:text-black" />
