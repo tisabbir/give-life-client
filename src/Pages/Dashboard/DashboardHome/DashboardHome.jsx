@@ -25,7 +25,7 @@ const DashboardHome = () => {
         const updatedItem = {
             donationStatus : newStatus,
         }
-        axiosSecure.patch(`/donationRequests/${item._id}`, updatedItem)
+        axiosSecure.patch(`/requests/${item._id}`, updatedItem)
         .then(res => {
             if(res.data.modifiedCount>0){
                 Swal.fire({

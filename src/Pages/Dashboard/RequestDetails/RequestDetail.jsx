@@ -1,11 +1,19 @@
 import { useLoaderData } from "react-router-dom";
 import SectionTitle from "../../../Components/SectionTitle/SectionTitle";
 import donationRequestBanner from "../../../assets/donationRequest.jpg";
+import Swal from "sweetalert2";
+import useAuth from "../../../Hooks/useAuth";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+
 
 const RequestDetail = () => {
   const request = useLoaderData();
+  const {user } = useAuth();
+  const axiosSecure = useAxiosSecure();
   const {
+    _id,
     requesterName,
+    requesterEmail,
     recipientName,
     recipientDistrict,
     recipientUpozila,
@@ -15,6 +23,43 @@ const RequestDetail = () => {
     requestMessage,
     donationStatus,
   } = request;
+
+  const updatedRequest = {
+    donationStatus : "inprogress"
+  }
+
+
+  const handleDonate = () => {
+    Swal.fire({
+        title: "Are you sure to donate?",
+        text: `Donor Name : ${user.displayName} || 
+                Donor Email : ${user.email}
+        `,
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "I'll Donate, InshaAllah!"
+      }).then((result) => {
+        if (result.isConfirmed) {
+
+            axiosSecure.patch(`/requests/${_id}`, updatedRequest)
+            .then(res => {
+                console.log(res.data);
+                if(res.data.modifiedCount > 0){
+                    Swal.fire({
+                        title: "Your Donation Confirmed!",
+                        text: "We will be waiting for your donation.",
+                        icon: "success"
+                      });
+                }
+            })
+
+
+          
+        }
+      });
+  }
   return (
     <div>
       <SectionTitle
@@ -48,7 +93,7 @@ const RequestDetail = () => {
           </div>
 
           <h1 className="text-2xl font-bold">{recipientName}</h1>
-
+              
           <p className="text-gray-500 text-sm">
             Address :{" "}
             {hospital +
@@ -61,6 +106,13 @@ const RequestDetail = () => {
           </p>
 
           <p>{requestMessage}</p>
+          <p className="text-gray-500 text-sm pb-4">Requester : {requesterName} | {requesterEmail} </p>
+            {
+                donationStatus === 'done' || donationStatus === 'canceled' ? 
+                <button onClick={handleDonate} disabled className="btn bg-[#9B111E] text-white text-xl px-12">Donate</button>
+                : 
+                <button onClick={handleDonate} className="btn bg-[#9B111E] text-white text-xl px-12">Donate</button>
+            }
         </div>
       </div>
     </div>
