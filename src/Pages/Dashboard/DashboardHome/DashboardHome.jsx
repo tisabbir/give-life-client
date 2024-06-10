@@ -22,7 +22,6 @@ const DashboardHome = () => {
   });
 
   const handleStatus = (item, newStatus) => {
-        console.log(item);
         const updatedItem = {
             donationStatus : newStatus,
         }
@@ -43,6 +42,42 @@ const DashboardHome = () => {
         .catch(err => {
             console.log(err);
         })
+  }
+
+  const handleDelete = (id) => {
+    Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+      }).then((result) => {
+        if (result.isConfirmed) {
+
+            axiosSecure.delete(`/donationRequests/${id}`)
+            .then(res => {
+                console.log(res.data);
+
+                Swal.fire({
+                    title: "Deleted!",
+                    text: "Your file has been deleted.",
+                    icon: "success"
+                  });
+
+                refetch();
+        
+            })
+            .catch(err => {
+                console.log(err);
+            })
+
+
+         
+
+        }
+      });
   }
 
   return (
@@ -112,7 +147,7 @@ const DashboardHome = () => {
                       <FaPenToSquare className="text-center text-xl hover:text-[#9B111E]" />{" "}
                     </td>
                     <td>
-                      <FaTrash className="text-center text-xl text-[#9B111E] hover:text-black" />
+                      <FaTrash onClick={()=>handleDelete(item._id)} className="text-center text-xl text-[#9B111E] hover:text-black" />
                     </td>
                     <td>
                       <FaAddressBook className="text-center text-xl hover:text-[#9B111E]" />{" "}
