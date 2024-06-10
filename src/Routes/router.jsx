@@ -9,6 +9,7 @@ import PrivateRoute from "./PrivateRoute";
 import CreateDonationRequest from "../Pages/Dashboard/CreateDonation/CreateDonationRequest";
 import DashboardHome from "../Pages/Dashboard/DashboardHome/DashboardHome";
 import UpdateRequest from "../Pages/Dashboard/UpdateRequest/UpdateRequest";
+import RequestDetail from "../Pages/Dashboard/RequestDetails/RequestDetail";
 
 const router = createBrowserRouter([
   {
@@ -47,6 +48,11 @@ const router = createBrowserRouter([
           {
             path: "updateRequest/:id",
             element: <PrivateRoute><UpdateRequest /></PrivateRoute>,
+            loader: ({params})=>fetch(`http://localhost:5000/requests/${params.id}`)
+          },
+          {
+            path: "requestDetails/:id",
+            element: <PrivateRoute><RequestDetail /></PrivateRoute>,
             loader: ({params})=>fetch(`http://localhost:5000/requests/${params.id}`)
           },
         ],

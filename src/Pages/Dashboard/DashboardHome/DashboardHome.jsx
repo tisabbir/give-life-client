@@ -44,6 +44,8 @@ const DashboardHome = () => {
         })
   }
 
+  
+
   const handleDelete = (id) => {
     Swal.fire({
         title: "Are you sure?",
@@ -151,7 +153,7 @@ const DashboardHome = () => {
                       <FaTrash onClick={()=>handleDelete(item._id)} className="text-center text-xl text-[#9B111E] hover:text-black" />
                     </td>
                     <td>
-                      <FaAddressBook className="text-center text-xl hover:text-[#9B111E]" />{" "}
+                      <Link to={`/dashboard/requestDetails/${item._id}`}><FaAddressBook className="text-center text-xl hover:text-[#9B111E]" /></Link>
                     </td>
                   </tr>
                 ))}
