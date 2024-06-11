@@ -1,4 +1,4 @@
-import { FaHouse, FaPerson } from "react-icons/fa6";
+import { FaHouse, FaPeopleGroup, FaPerson } from "react-icons/fa6";
 import { IoIosAddCircle } from "react-icons/io";
 import { NavLink, Outlet } from "react-router-dom";
 
@@ -28,6 +28,7 @@ const Dashboard = () => {
           {" "}
           <FaPerson /> Profile
         </NavLink>
+
         <NavLink
           style={({ isActive }) => {
             return {
@@ -42,6 +43,21 @@ const Dashboard = () => {
           {" "}
           <IoIosAddCircle /> Create Donation Request
         </NavLink>
+        <NavLink
+          style={({ isActive }) => {
+            return {
+              fontWeight: isActive ? "bold" : "",
+              color: isActive ? "#9B111E" : "white",
+              backgroundColor: isActive ? "white" : "",
+            };
+          }}
+          to={"/dashboard/all-users"}
+          className=" btn btn-ghost flex justify-start items-center gap-1 "
+        >
+          {" "}
+          <FaPeopleGroup /> All Users
+        </NavLink>
+
       </div>
       <div className="pt-24 w-full">
         <Outlet />
