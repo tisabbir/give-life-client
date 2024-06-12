@@ -19,8 +19,8 @@ const AllUsers = () => {
         role : member.role,
     }
     axiosSecure.patch(`members/${member.email}`, updatedMember)
-    .then(res => {
-        console.log(res.data);
+    .then(() => {
+        
         refetch();
     })
     .catch(err => {
@@ -33,8 +33,8 @@ const AllUsers = () => {
         role : role,
     }
     axiosSecure.patch(`members/${member.email}`, updatedMember)
-    .then(res => {
-        console.log(res.data);
+    .then(()=> {
+
         refetch();
     })
     .catch(err => {

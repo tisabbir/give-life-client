@@ -20,7 +20,7 @@ const ContentManagement = () => {
       },
     });
   
-    console.log(blogs);
+
 
     const handleStatus = (blog, status) => {
         const updatedBlog = {
@@ -28,7 +28,7 @@ const ContentManagement = () => {
         }
         axiosSecure.patch(`/blogs/${blog._id}`, updatedBlog)
         .then(res => {
-            console.log(res.data);
+
             if(res.data.modifiedCount>0){
                 Swal.fire({
                     position: "top-end",

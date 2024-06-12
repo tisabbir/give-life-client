@@ -15,7 +15,7 @@ const DonationRequest = () => {
         }
     })
 
-    console.log(pendingDonationRequests);
+   
 
     return (
         <div className="pt-24">

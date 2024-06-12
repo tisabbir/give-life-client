@@ -45,7 +45,6 @@ const RequestDetail = () => {
 
             axiosSecure.patch(`/requests/${_id}`, updatedRequest)
             .then(res => {
-                console.log(res.data);
                 if(res.data.modifiedCount > 0){
                     Swal.fire({
                         title: "Your Donation Confirmed!",

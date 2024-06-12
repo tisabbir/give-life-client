@@ -69,7 +69,7 @@ const CreateDonationRequest = () => {
 
     axiosSecure.post('/donationRequests', donationRequest)
     .then(res => {
-        console.log(res.data);
+
 
         if(res.data.insertedId){
             Swal.fire({

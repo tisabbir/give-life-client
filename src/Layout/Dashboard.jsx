@@ -9,8 +9,7 @@ import useVolunteer from "../Hooks/useVolunteer";
 const Dashboard = () => {
   const [isAdmin] = useAdmin();
   const [isVolunteer] = useVolunteer();
-  console.log(isAdmin);
-  console.log(isVolunteer);
+  
   return (
     <div className="flex flex-col md:flex-row">
       <div className="w-full md:w-80 pt-24 px-4 bg-[#9B111E] pb-4 text-white md:min-h-screen space-y-2">

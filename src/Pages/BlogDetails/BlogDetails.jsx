@@ -4,7 +4,7 @@ import PrimaryBtn from "../../Components/PrimaryButton/PrimaryBtn";
 
 const BlogDetails = () => {
   const blog = useLoaderData();
-  console.log(blog);
+
   return (
     <div className="pt-24">
         <SectionTitle Heading={'Blog Details'} subHeading={blog.title} />

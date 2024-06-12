@@ -10,8 +10,8 @@ const Login = () => {
         const email = form.email.value;
         const password = form.password.value;
         loginUser(email, password)
-        .then(res => {
-            console.log(res.user);
+        .then(() => {
+
         })
         .catch(err => {
             console.log(err);

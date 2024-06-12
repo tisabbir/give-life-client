@@ -12,7 +12,7 @@ const BlogPage = () => {
     },
   });
 
-  console.log(publishedBlogs);
+
 
   return (
     <div className="pt-24">

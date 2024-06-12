@@ -84,8 +84,8 @@ const Register = () => {
     };
 
     createUser(email, password)
-      .then((res) => {
-        console.log(res.user);
+      .then(() => {
+
         updateUserProfile(name, avatarUrl).then(() => {
           axiosPublic
             .post("/users", userInfo)

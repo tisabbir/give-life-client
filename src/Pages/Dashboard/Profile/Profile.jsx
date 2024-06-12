@@ -47,7 +47,6 @@ const Profile = () => {
 
     axiosSecure.patch(`/users/${email}`, updatedUser)
     .then(res => {
-        console.log(res.data);
         if(res.data.modifiedCount>0){
 
             updateProfile(auth.currentUser, {
@@ -55,7 +54,7 @@ const Profile = () => {
                 photoURL: updatedPhoto,
               }).then(() => {
                 // Profile updated!
-                console.log('profile updated in firebase');
+
               }).catch((error) => {
                 // An error occurred
                 console.log(error);

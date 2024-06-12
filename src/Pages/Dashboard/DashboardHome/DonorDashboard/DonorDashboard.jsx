@@ -27,7 +27,7 @@ const sortedDonationRequests = donationRequests.sort((a, b) => new Date(b.donati
 
 const recentThreeData = sortedDonationRequests.slice(0, 3);
 
-console.log(recentThreeData);
+
 
 
 
@@ -70,7 +70,7 @@ console.log(recentThreeData);
 
             axiosSecure.delete(`/donationRequests/${id}`)
             .then(res => {
-                console.log(res.data);
+
                 if(res.data.deletedCount > 0){
 
                     Swal.fire({
