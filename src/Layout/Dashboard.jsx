@@ -2,6 +2,7 @@ import { FaHouse, FaPeopleGroup, FaPerson } from "react-icons/fa6";
 import { IoIosAddCircle } from "react-icons/io";
 import { NavLink, Outlet } from "react-router-dom";
 import { BiSolidDonateBlood } from "react-icons/bi";
+import { RiArticleFill } from "react-icons/ri";
 
 const Dashboard = () => {
   return (
@@ -71,6 +72,20 @@ const Dashboard = () => {
         >
           {" "}
           <BiSolidDonateBlood /> All Blood Donation Request
+        </NavLink>
+        <NavLink
+          style={({ isActive }) => {
+            return {
+              fontWeight: isActive ? "bold" : "",
+              color: isActive ? "#9B111E" : "white",
+              backgroundColor: isActive ? "white" : "",
+            };
+          }}
+          to={"/dashboard/content-management"}
+          className=" btn btn-ghost flex justify-start items-center gap-1 "
+        >
+          {" "}
+          <RiArticleFill /> Content Management
         </NavLink>
 
       </div>

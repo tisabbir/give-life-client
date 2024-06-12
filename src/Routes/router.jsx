@@ -13,6 +13,8 @@ import RequestDetail from "../Pages/Dashboard/RequestDetails/RequestDetail";
 import MyDonationRequests from "../Pages/Dashboard/MyDonationRequests/MyDonationRequests";
 import AllUsers from "../Pages/Dashboard/AllUsers/AllUsers";
 import AllBloodDonationRequest from "../Pages/Dashboard/AllBloodDonationRequest/AllBloodDonationRequest";
+import ContentManagement from "../Pages/Dashboard/ContentManagement/ContentManagement";
+import AddBlog from "../Pages/Dashboard/ContentManagement/AddBlog/AddBlog";
 
 const router = createBrowserRouter([
   {
@@ -42,12 +44,20 @@ const router = createBrowserRouter([
           },
           //admin related
           {
-            path: "/dashboard/all-users",
+            path: "all-users",
             element: <PrivateRoute><AllUsers /></PrivateRoute>,
           },
           {
-            path: "/dashboard/all-blood-donation-request",
+            path: "all-blood-donation-request",
             element: <PrivateRoute><AllBloodDonationRequest /></PrivateRoute>,
+          },
+          {
+            path: "content-management",
+            element: <PrivateRoute><ContentManagement /></PrivateRoute>,
+          },
+          {
+            path: '/dashboard/content-management/add-blog', 
+            element: <PrivateRoute><AddBlog /></PrivateRoute>
           },
           //Donor Related
           {
