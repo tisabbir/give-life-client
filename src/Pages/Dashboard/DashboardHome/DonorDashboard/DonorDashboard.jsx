@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import useAuth from "../../../../Hooks/useAuth";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
-import SectionTitle from "../../../../Components/SectionTitle/SectionTitle";
 import PrimaryBtn from "../../../../Components/PrimaryButton/PrimaryBtn";
 
 const DonorDashboard = () => {
@@ -86,10 +85,7 @@ const DonorDashboard = () => {
 
   return (
     <div>
-      <SectionTitle
-        Heading={"Welcome To Your Dashboard"}
-        subHeading={user.displayName}
-      />
+      
 
       {donationRequests ? (
         <div className="mt-12">
