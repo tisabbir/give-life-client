@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import { Link } from "react-router-dom";
 
 const BlogPage = () => {
   const axiosPublic = useAxiosPublic();
@@ -31,7 +32,7 @@ const BlogPage = () => {
               <h2 className="card-title">{blog.title}</h2>
               
               <div className="card-actions justify-center w-full">
-                <button className="btn w-full bg-[#9B111E] text-white">View Details</button>
+                <Link to={`/blogDetails/${blog._id}`}><button className="btn w-full bg-[#9B111E] text-white">View Details</button></Link>
               </div>
             </div>
           </div>

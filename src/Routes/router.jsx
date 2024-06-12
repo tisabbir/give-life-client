@@ -17,6 +17,7 @@ import ContentManagement from "../Pages/Dashboard/ContentManagement/ContentManag
 import AddBlog from "../Pages/Dashboard/ContentManagement/AddBlog/AddBlog";
 import DonationRequest from "../Pages/DonationRequest/DonationRequest";
 import BlogPage from "../Pages/BlogPage/BlogPage";
+import BlogDetails from "../Pages/BlogDetails/BlogDetails";
 
 const router = createBrowserRouter([
   {
@@ -42,6 +43,11 @@ const router = createBrowserRouter([
       {
         path: "/blogPage",
         element: <BlogPage />,
+      },
+      {
+        path: "/blogDetails/:id",
+        element: <PrivateRoute><BlogDetails /></PrivateRoute>,
+        loader: ({params})=>fetch(`http://localhost:5000/blogs/${params.id}`)
       },
       {
         path: "/dashboard",
