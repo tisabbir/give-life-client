@@ -83,10 +83,10 @@ const Profile = () => {
       <SectionTitle Heading={"User Profile"} subHeading={name} />
 
       {editable ? (
-        <div className="card w-96 bg-base-100 shadow-xl mx-auto mt-4">
+        <div className="card w-full md:w-96 bg-base-100 shadow-xl mx-auto mt-4">
           <div className="flex  justify-end"></div>
-          <figure className="px-10 pt-10">
-            <img src={avatarUrl} alt="Shoes" className="rounded-full" />
+          <figure className="">
+            <img src={avatarUrl} alt="Shoes" className="max-w-72 w-3/4 rounded-full" />
           </figure>
           <div className="card-body items-center text-left">
             <form onSubmit={handleSave} className="space-y-4">
