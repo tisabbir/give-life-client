@@ -50,7 +50,7 @@ const Nav = () => {
       <li>
         <NavLink
           className="hover:text-[#9B111E]"
-          to={"/blog"}
+          to={"/blogPage"}
           style={({ isActive }) => {
             return {
               fontWeight: isActive ? "bold" : "",
