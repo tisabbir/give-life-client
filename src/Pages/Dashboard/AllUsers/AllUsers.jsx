@@ -5,7 +5,7 @@ import { FaBars } from "react-icons/fa6";
 const AllUsers = () => {
   const axiosSecure = useAxiosSecure();
 
-  const { data: users = [] } = useQuery({
+  const { data: members = [], refetch } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
       const res = await axiosSecure.get("/users");
@@ -13,7 +13,34 @@ const AllUsers = () => {
     },
   });
 
-  console.log(users);
+  const handleStatus = (member, status) => {
+    const updatedMember = {
+        status : status,
+        role : member.role,
+    }
+    axiosSecure.patch(`members/${member.email}`, updatedMember)
+    .then(res => {
+        console.log(res.data);
+        refetch();
+    })
+    .catch(err => {
+        console.log(err);
+    })
+  }
+  const handleRole = (member, role) => {
+    const updatedMember = {
+        status : member.status,
+        role : role,
+    }
+    axiosSecure.patch(`members/${member.email}`, updatedMember)
+    .then(res => {
+        console.log(res.data);
+        refetch();
+    })
+    .catch(err => {
+        console.log(err);
+    })
+  }
 
   return (
     <div>
@@ -32,23 +59,23 @@ const AllUsers = () => {
             </tr>
           </thead>
           <tbody>
-            {users.map((user, index) => (
+            {members.map((member, index) => (
               <tr key={index}>
                 <th>{index + 1}</th>
                 <td>
                   <div className="avatar">
                     <div className="mask mask-squircle w-12 h-12">
                       <img
-                        src={user.avatarUrl}
+                        src={member.avatarUrl}
                         alt="Avatar Tailwind CSS Component"
                       />
                     </div>
                   </div>
                 </td>
-                <td>{user.email}</td>
-                <td>{user.name}</td>
-                <td>{user.role}</td>
-                <td>{user.status}</td>
+                <td>{member.email}</td>
+                <td>{member.name}</td>
+                <td>{member.role}</td>
+                <td>{member.status}</td>
                 <th>
                   <div className="dropdown dropdown-hover dropdown-bottom dropdown-end">
                     <div tabIndex={0} role="button" className="btn m-1">
@@ -59,16 +86,16 @@ const AllUsers = () => {
                       className="dropdown-content z-[10] menu p-2 shadow bg-base-100 rounded-box w-52"
                     >
                       <li>
-                        {user.status === 'active' ? <button>Block</button> : <button>Unblock</button>}
+                        {member.status === 'active' ? <button onClick={()=>handleStatus(member, 'blocked')}>Block</button> : <button onClick={()=>handleStatus(member, 'active')}>Unblock</button>}
                       </li>
                       <li>
                         {
-                            user.role === "donor" ? <button>Make Volunteer</button> : ''
+                            member.role === "donor" ? <button onClick={()=>handleRole(member, 'volunteer')}>Make Volunteer</button> : <></>
                         }
                       </li>
                       <li>
                         {
-                            user.role === "donor" || user.status === 'volunteer' ? <button>Make Admin</button> : ''
+                            member.role === "donor" || member.role === 'volunteer' ? <button onClick={()=>handleRole(member, 'admin')}>Make Admin</button> : <></>
                         }
                       </li>
                     </ul>

@@ -5,7 +5,7 @@ import { NavLink, Outlet } from "react-router-dom";
 const Dashboard = () => {
   return (
     <div className="flex flex-col md:flex-row">
-      <div className="w-full md:w-80 pt-24 px-2 bg-[#9B111E] pb-4 text-white md:min-h-screen space-y-2">
+      <div className="w-full md:w-80 pt-24 px-4 bg-[#9B111E] pb-4 text-white md:min-h-screen space-y-2">
         <NavLink
           
           to={"/dashboard"}
