@@ -47,7 +47,7 @@ const router = createBrowserRouter([
       {
         path: "/blogDetails/:id",
         element: <PrivateRoute><BlogDetails /></PrivateRoute>,
-        loader: ({params})=>fetch(`http://localhost:5000/blogs/${params.id}`)
+        loader: ({params})=>fetch(`https://give-life-server.vercel.app/blogs/${params.id}`)
       },
       {
         path: "/dashboard",
@@ -91,12 +91,12 @@ const router = createBrowserRouter([
           {
             path: "updateRequest/:id",
             element: <PrivateRoute><UpdateRequest /></PrivateRoute>,
-            loader: ({params})=>fetch(`http://localhost:5000/requests/${params.id}`)
+            loader: ({params})=>fetch(`https://give-life-server.vercel.app/requests/${params.id}`)
           },
           {
             path: "requestDetails/:id",
             element: <PrivateRoute><RequestDetail /></PrivateRoute>,
-            loader: ({params})=>fetch(`http://localhost:5000/requests/${params.id}`)
+            loader: ({params})=>fetch(`https://give-life-server.vercel.app/requests/${params.id}`)
           },
         ],
       },
