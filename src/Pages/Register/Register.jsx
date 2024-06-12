@@ -120,7 +120,7 @@ const Register = () => {
       <div className="hero min-h-screen">
         <div className="hero-content flex-col lg:flex-row">
           <div className="text-center lg:text-left">
-            <img className="max-w-lg rounded-lg" src={registerPicture} />
+            <img className="max-w-lg w-full rounded-lg" src={registerPicture} />
           </div>
 
           <div className="card shrink-0 w-full flex-1 shadow-2xl bg-base-100">

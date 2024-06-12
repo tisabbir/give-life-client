@@ -22,7 +22,7 @@ const Login = () => {
       <div className="hero min-h-screen">
         <div className="hero-content flex-col lg:flex-row-reverse">
           <div className="text-center lg:text-left">
-            <img className="max-w-lg rounded-lg" src={loginPicture} />
+            <img className="max-w-lg w-full rounded-lg" src={loginPicture} />
           </div>
           <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
             <form onSubmit={handleSubmit} className="card-body">
