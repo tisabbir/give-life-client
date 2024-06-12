@@ -6,6 +6,7 @@ import SectionTitle from "../../../Components/SectionTitle/SectionTitle";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 import SecondaryBtn from "../../../Components/SecondaryButton/SecondaryBtn";
+import { useState } from "react";
 
 
 const ContentManagement = () => {
@@ -19,6 +20,14 @@ const ContentManagement = () => {
         return res.data;
       },
     });
+
+    const [filteredBlogs, setFilteredBlogs] = useState(blogs);
+
+  const handleFilter = (status) => {
+    const filteredBlogs = blogs?.filter(member => member.status === status);
+    setFilteredBlogs(filteredBlogs);
+    refetch();
+  }
   
 
 
@@ -90,8 +99,25 @@ const ContentManagement = () => {
 
             <SectionTitle Heading={"Blogs"} subHeading={"All the blogs"} />
 
+            <div className="dropdown">
+        <div tabIndex={0} role="button" className="btn m-1">
+          Filter
+        </div>
+        <ul
+          tabIndex={0}
+          className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
+        >
+          <li>
+            <button onClick={()=>handleFilter('draft')}>Draft</button>
+          </li>
+          <li>
+            <button onClick={()=>handleFilter('published')} >Published</button>
+          </li>
+        </ul>
+      </div>
+
       <div className="my-12 grid grid-cols-1 lg:grid-cols-2 gap-4 mx-auto">
-        {blogs.map((blog, index) => (
+        {filteredBlogs.map((blog, index) => (
           <div
             key={index}
             className="card card-compact w-96 bg-base-100 shadow-xl mx-auto"

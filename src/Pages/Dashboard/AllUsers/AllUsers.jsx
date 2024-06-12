@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { FaBars } from "react-icons/fa6";
+import { useState } from "react";
 
 const AllUsers = () => {
   const axiosSecure = useAxiosSecure();
@@ -12,6 +13,15 @@ const AllUsers = () => {
       return res.data;
     },
   });
+
+
+  const [users, setUsers] = useState(members);
+
+  const handleFilter = (status) => {
+    const filteredRequests = members?.filter(member => member.status === status);
+    setUsers(filteredRequests);
+    refetch();
+  }
 
   const handleStatus = (member, status) => {
     const updatedMember = {
@@ -44,6 +54,24 @@ const AllUsers = () => {
 
   return (
     <div>
+
+<div className="dropdown">
+        <div tabIndex={0} role="button" className="btn m-1">
+          Filter
+        </div>
+        <ul
+          tabIndex={0}
+          className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
+        >
+          <li>
+            <button onClick={()=>handleFilter('active')}>Active</button>
+          </li>
+          <li>
+            <button onClick={()=>handleFilter('blocked')} >Blocked</button>
+          </li>
+        </ul>
+      </div>
+
       <div className="overflow-x-auto">
         <table className="table">
           {/* head */}
@@ -59,7 +87,7 @@ const AllUsers = () => {
             </tr>
           </thead>
           <tbody>
-            {members.map((member, index) => (
+            {users.map((member, index) => (
               <tr key={index}>
                 <th>{index + 1}</th>
                 <td>
