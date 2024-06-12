@@ -87,6 +87,43 @@ const AddBlog = () => {
     })
   }
   
+  const handleDelete = (id) => {
+    Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+      }).then((result) => {
+        if (result.isConfirmed) {
+
+            axiosSecure.delete(`/blogs/${id}`)
+            .then(res => {
+                console.log(res.data);
+                if(res.data.deletedCount > 0){
+
+                    Swal.fire({
+                        title: "Deleted!",
+                        text: "Your file has been deleted.",
+                        icon: "success"
+                      });
+    
+                    refetch();
+                }
+        
+            })
+            .catch(err => {
+                console.log(err);
+            })
+
+
+         
+
+        }
+      });
+  }
 
   return (
     <div>
@@ -163,7 +200,7 @@ const AddBlog = () => {
                     blog.status === 'draft' ? <Link onClick={()=>handleStatus(blog, 'published')}><SecondaryBtn  btnText={'Publish'} /></Link> :   <Link onClick={()=>handleStatus(blog, 'draft')}><SecondaryBtn  btnText={'UnPublish'} /></Link>
                 }
 
-                <button className="btn bg-[#9B111E] text-white btn-xs justify-end">Delete</button>
+                <button onClick={()=>handleDelete(blog._id)} className="btn bg-[#9B111E] text-white btn-xs justify-end">Delete</button>
               </div>
             </div>
           </div>
