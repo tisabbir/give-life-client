@@ -1,6 +1,7 @@
 import { FaHouse, FaPeopleGroup, FaPerson } from "react-icons/fa6";
 import { IoIosAddCircle } from "react-icons/io";
 import { NavLink, Outlet } from "react-router-dom";
+import { BiSolidDonateBlood } from "react-icons/bi";
 
 const Dashboard = () => {
   return (
@@ -56,6 +57,20 @@ const Dashboard = () => {
         >
           {" "}
           <FaPeopleGroup /> All Users
+        </NavLink>
+        <NavLink
+          style={({ isActive }) => {
+            return {
+              fontWeight: isActive ? "bold" : "",
+              color: isActive ? "#9B111E" : "white",
+              backgroundColor: isActive ? "white" : "",
+            };
+          }}
+          to={"/dashboard/all-blood-donation-request"}
+          className=" btn btn-ghost flex justify-start items-center gap-1 "
+        >
+          {" "}
+          <BiSolidDonateBlood /> All Blood Donation Request
         </NavLink>
 
       </div>

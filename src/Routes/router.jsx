@@ -12,6 +12,7 @@ import UpdateRequest from "../Pages/Dashboard/UpdateRequest/UpdateRequest";
 import RequestDetail from "../Pages/Dashboard/RequestDetails/RequestDetail";
 import MyDonationRequests from "../Pages/Dashboard/MyDonationRequests/MyDonationRequests";
 import AllUsers from "../Pages/Dashboard/AllUsers/AllUsers";
+import AllBloodDonationRequest from "../Pages/Dashboard/AllBloodDonationRequest/AllBloodDonationRequest";
 
 const router = createBrowserRouter([
   {
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
           {
             path: "/dashboard/all-users",
             element: <PrivateRoute><AllUsers /></PrivateRoute>,
+          },
+          {
+            path: "/dashboard/all-blood-donation-request",
+            element: <PrivateRoute><AllBloodDonationRequest /></PrivateRoute>,
           },
           //Donor Related
           {
