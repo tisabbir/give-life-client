@@ -11,6 +11,9 @@ import Swal from "sweetalert2";
 const AllBloodDonationRequest = () => {
 
     const axiosSecure = useAxiosSecure();
+    
+
+    
   
     const { data: donationRequests , refetch} = useQuery({
       queryKey: ["requests"],
@@ -94,7 +97,7 @@ const AllBloodDonationRequest = () => {
         {donationRequests ? (
           <div className="mt-12">
             <div className="overflow-x-auto">
-              <table className="table table-xs">
+              <table className="table">
                 <thead>
                   <tr>
                     <th>#</th>

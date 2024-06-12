@@ -12,13 +12,24 @@ const DonorDashboard = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
 
-  const { data: donationRequests , refetch} = useQuery({
+  const { data: donationRequests = [] , refetch} = useQuery({
     queryKey: ["requests", user.email],
     queryFn: async () => {
       const res = await axiosSecure.get(`/donationRequests/${user.email}`);
       return res.data;
     },
   });
+
+
+
+//Recent 3 donation req 
+const sortedDonationRequests = donationRequests.sort((a, b) => new Date(b.donationDateAndTime) - new Date(a.donationDateAndTime));
+
+const recentThreeData = sortedDonationRequests.slice(0, 3);
+
+console.log(recentThreeData);
+
+
 
   const handleStatus = (item, newStatus) => {
         const updatedItem = {
@@ -90,7 +101,7 @@ const DonorDashboard = () => {
       {donationRequests ? (
         <div className="mt-12">
           <div className="overflow-x-auto">
-            <table className="table table-xs">
+            <table className="table">
               <thead>
                 <tr>
                   <th>#</th>
@@ -105,7 +116,7 @@ const DonorDashboard = () => {
                 </tr>
               </thead>
               <tbody>
-                {donationRequests.map((item, index) => (
+                {recentThreeData.map((item, index) => (
                   <tr key={index}>
                     <th>{index + 1}</th>
                     <td>{item.recipientName}</td>
@@ -166,7 +177,7 @@ const DonorDashboard = () => {
           </Link>
         </div>
       ) : (
-        <></>
+       <></>
       )}
     </div>
   );
