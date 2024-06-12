@@ -5,9 +5,18 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import { useQuery } from "@tanstack/react-query";
 
 const CreateDonationRequest = () => {
   const { user } = useAuth();
+  const { data: userInfo = {} } = useQuery({
+    queryKey: ["user"],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/users/${user.email}`);
+      return res.data;
+    },
+  });
+
   const [districts, setDistricts] = useState([]);
   const [upozilas, setUpozilas] = useState([]);
   const [startDate, setStartDate] = useState(new Date());
@@ -56,7 +65,7 @@ const CreateDonationRequest = () => {
         donationStatus
     }
 
-    console.log(donationRequest);
+   
 
     axiosSecure.post('/donationRequests', donationRequest)
     .then(res => {
@@ -212,9 +221,9 @@ const CreateDonationRequest = () => {
               
 
               <div className="form-control mt-6 md:col-span-2">
-                <button className="btn bg-[#9B111E] text-white mt-3">
+                {userInfo?.status === 'blocked' ? <></> : <button className="btn bg-[#9B111E] text-white mt-3">
                   Request
-                </button>
+                </button>}
               </div>
             </form>
           </div>

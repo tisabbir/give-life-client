@@ -15,7 +15,6 @@ const Dashboard = () => {
     <div className="flex flex-col md:flex-row">
       <div className="w-full md:w-80 pt-24 px-4 bg-[#9B111E] pb-4 text-white md:min-h-screen space-y-2">
         <NavLink
-          
           to={"/dashboard"}
           className="btn btn-ghost flex justify-start items-center gap-1 "
         >
@@ -37,63 +36,103 @@ const Dashboard = () => {
           <FaPerson /> Profile
         </NavLink>
 
-        <NavLink
-          style={({ isActive }) => {
-            return {
-              fontWeight: isActive ? "bold" : "",
-              color: isActive ? "#9B111E" : "white",
-              backgroundColor: isActive ? "white" : "",
-            };
-          }}
-          to={"/dashboard/create-donation-request"}
-          className=" btn btn-ghost flex justify-start items-center gap-1 "
-        >
-          {" "}
-          <IoIosAddCircle /> Create Donation Request
-        </NavLink>
-        <NavLink
-          style={({ isActive }) => {
-            return {
-              fontWeight: isActive ? "bold" : "",
-              color: isActive ? "#9B111E" : "white",
-              backgroundColor: isActive ? "white" : "",
-            };
-          }}
-          to={"/dashboard/all-users"}
-          className=" btn btn-ghost flex justify-start items-center gap-1 "
-        >
-          {" "}
-          <FaPeopleGroup /> All Users
-        </NavLink>
-        <NavLink
-          style={({ isActive }) => {
-            return {
-              fontWeight: isActive ? "bold" : "",
-              color: isActive ? "#9B111E" : "white",
-              backgroundColor: isActive ? "white" : "",
-            };
-          }}
-          to={"/dashboard/all-blood-donation-request"}
-          className=" btn btn-ghost flex justify-start items-center gap-1 "
-        >
-          {" "}
-          <BiSolidDonateBlood /> All Blood Donation Request
-        </NavLink>
-        <NavLink
-          style={({ isActive }) => {
-            return {
-              fontWeight: isActive ? "bold" : "",
-              color: isActive ? "#9B111E" : "white",
-              backgroundColor: isActive ? "white" : "",
-            };
-          }}
-          to={"/dashboard/content-management"}
-          className=" btn btn-ghost flex justify-start items-center gap-1 "
-        >
-          {" "}
-          <RiArticleFill /> Content Management
-        </NavLink>
-
+        {isAdmin ? (
+          <>
+            {" "}
+            <NavLink
+              style={({ isActive }) => {
+                return {
+                  fontWeight: isActive ? "bold" : "",
+                  color: isActive ? "#9B111E" : "white",
+                  backgroundColor: isActive ? "white" : "",
+                };
+              }}
+              to={"/dashboard/all-users"}
+              className=" btn btn-ghost flex justify-start items-center gap-1 "
+            >
+              {" "}
+              <FaPeopleGroup /> All Users
+            </NavLink>{" "}
+            <NavLink
+              style={({ isActive }) => {
+                return {
+                  fontWeight: isActive ? "bold" : "",
+                  color: isActive ? "#9B111E" : "white",
+                  backgroundColor: isActive ? "white" : "",
+                };
+              }}
+              to={"/dashboard/all-blood-donation-request"}
+              className=" btn btn-ghost flex justify-start items-center gap-1 "
+            >
+              {" "}
+              <BiSolidDonateBlood /> All Blood Donation Request
+            </NavLink>
+            <NavLink
+              style={({ isActive }) => {
+                return {
+                  fontWeight: isActive ? "bold" : "",
+                  color: isActive ? "#9B111E" : "white",
+                  backgroundColor: isActive ? "white" : "",
+                };
+              }}
+              to={"/dashboard/content-management"}
+              className=" btn btn-ghost flex justify-start items-center gap-1 "
+            >
+              {" "}
+              <RiArticleFill /> Content Management
+            </NavLink>{" "}
+          </>
+        ) : isVolunteer ? (
+          <>
+            {" "}
+            <NavLink
+              style={({ isActive }) => {
+                return {
+                  fontWeight: isActive ? "bold" : "",
+                  color: isActive ? "#9B111E" : "white",
+                  backgroundColor: isActive ? "white" : "",
+                };
+              }}
+              to={"/dashboard/all-blood-donation-request"}
+              className=" btn btn-ghost flex justify-start items-center gap-1 "
+            >
+              {" "}
+              <BiSolidDonateBlood /> All Blood Donation Request
+            </NavLink>
+            <NavLink
+              style={({ isActive }) => {
+                return {
+                  fontWeight: isActive ? "bold" : "",
+                  color: isActive ? "#9B111E" : "white",
+                  backgroundColor: isActive ? "white" : "",
+                };
+              }}
+              to={"/dashboard/content-management"}
+              className=" btn btn-ghost flex justify-start items-center gap-1 "
+            >
+              {" "}
+              <RiArticleFill /> Content Management
+            </NavLink>{" "}
+          </>
+        ) : (
+          <>
+            {" "}
+            <NavLink
+              style={({ isActive }) => {
+                return {
+                  fontWeight: isActive ? "bold" : "",
+                  color: isActive ? "#9B111E" : "white",
+                  backgroundColor: isActive ? "white" : "",
+                };
+              }}
+              to={"/dashboard/create-donation-request"}
+              className=" btn btn-ghost flex justify-start items-center gap-1 "
+            >
+              {" "}
+              <IoIosAddCircle /> Create Donation Request
+            </NavLink>
+          </>
+        )}
       </div>
       <div className="pt-24 w-full">
         <Outlet />
