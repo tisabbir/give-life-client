@@ -8,26 +8,27 @@ import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
 const Register = () => {
   const [districts, setDistricts] = useState([]);
+  const [districtId, setDistrictId] = useState(null);
   const [upozilas, setUpozilas] = useState([]);
   const { createUser, updateUserProfile } = useAuth();
   const axiosPublic = useAxiosPublic();
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("districts.json")
+    fetch("https://give-life-server.vercel.app/districts")
       .then((res) => res.json())
       .then((data) => {
-        setDistricts(data[2].data);
+        setDistricts(data);
       });
   }, []);
 
   useEffect(() => {
-    fetch("upozillas.json")
+    fetch(`https://give-life-server.vercel.app/upozilas/${districtId}`)
       .then((res) => res.json())
       .then((data) => {
-        setUpozilas(data[2].data);
+        setUpozilas(data);
       });
-  }, []);
+  }, [districtId]);
 
   const handleRegister = (e) => {
     e.preventDefault();
@@ -85,7 +86,6 @@ const Register = () => {
 
     createUser(email, password)
       .then(() => {
-
         updateUserProfile(name, avatarUrl).then(() => {
           axiosPublic
             .post("/users", userInfo)
@@ -193,13 +193,16 @@ const Register = () => {
                   <span className="label-text">District</span>
                 </label>
                 <select
+                  onChange={(event) => setDistrictId(event.target.value)}
                   defaultValue={"Choose your district"}
                   name="district"
                   className="select select-bordered w-full max-w-xs"
                 >
                   <option disabled>Choose your district</option>
-                  {districts.map((district) => (
-                    <option key={district.id}>{district.name}</option>
+                  {districts?.map((district) => (
+                    <option key={district.id} value={district.id}>
+                      {district.name}
+                    </option>
                   ))}
                 </select>
               </div>
@@ -209,12 +212,13 @@ const Register = () => {
                   <span className="label-text">Upozila</span>
                 </label>
                 <select
+                  disabled={!districtId}
                   defaultValue={"Choose your upozila"}
                   name="upozila"
                   className="select select-bordered w-full max-w-xs"
                 >
                   <option disabled>Choose your Upozila</option>
-                  {upozilas.map((upozila) => (
+                  {upozilas?.map((upozila) => (
                     <option key={upozila.id}>{upozila.name}</option>
                   ))}
                 </select>
