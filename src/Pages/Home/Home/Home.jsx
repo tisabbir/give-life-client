@@ -7,7 +7,7 @@ const Home = () => {
   return (
     <div>
       <Banner />
-      <DonationRequestsSection />
+      
       <FeaturedSection />
       <ContactUs />
     </div>
