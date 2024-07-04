@@ -2,6 +2,14 @@
 
 Welcome to the Give Life project! This web application is designed to facilitate blood donation management, providing a user-friendly interface for donors, volunteers, and administrators.
 
+# Project Overview 
+
+"Give Life" is a web application designed to streamline the blood donation process by connecting donors with recipients and managing the donation process efficiently.
+
+"Give Life" aims to eliminate the gap between blood donors and volunteers, making the blood donation process easier and more efficient.
+
+"Give Life" addresses this problem by providing a robust platform that facilitates effective communication between donors and volunteers, ensuring a seamless blood donation process.
+
 ## Admin Credentials
 
 - **Username:** [wiqico@mailinator.com](mailto:wiqico@mailinator.com)
@@ -43,6 +51,34 @@ Welcome to the Give Life project! This web application is designed to facilitate
 10. **Integration of Payment Methods:**
     - Support for donations and funding through various payment methods.
 
+
+## Technology Used 
+1. MongoDB
+2. Express JS
+3. React JS
+4. Node JS
+5. JavaScript
+6. Tailwind CSS
+7. HTML
+
+
+
 ## Getting Started
 
 To get started with the Give Life project, visit the [live site](https://give-life-bd037.web.app/) and log in with the admin credentials provided above.
+
+## Steps to run the project locally
+
+Prerequisites
+1. Install Node.js and npm
+2. Install MongoDB
+3. Install Git
+
+### Steps
+1. Clone the Repository
+2. Install Backend Dependencies
+3. Configure Backend Environment Variables
+4. Run Backend Server
+5. Install Frontend Dependencies
+6. Configure Frontend Environment Variables
+7. Run Frontend Server
