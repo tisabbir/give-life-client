@@ -5,6 +5,7 @@ import registerPicture from "../../assets/register.jpg";
 import { useEffect, useState } from "react";
 import useAuth from "../../Hooks/useAuth";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import React from 'react';
 
 const Register = () => {
   const [districts, setDistricts] = useState([]);

@@ -1,6 +1,7 @@
 import axios from "axios";
 import useAuth from "./useAuth";
 import { useNavigate } from "react-router-dom";
+import React from 'react';
 
 const axiosSecure = axios.create({
     baseURL : 'https://give-life-server.vercel.app'

@@ -1,6 +1,7 @@
 import { Link, NavLink } from "react-router-dom";
 import PrimaryBtn from "../../Components/PrimaryButton/PrimaryBtn";
 import useAuth from "../../Hooks/useAuth";
+import React from 'react';
 
 const Nav = () => {
   const {user} = useAuth();

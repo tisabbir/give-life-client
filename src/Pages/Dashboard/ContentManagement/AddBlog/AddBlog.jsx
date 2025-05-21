@@ -3,6 +3,10 @@ import SectionTitle from "../../../../Components/SectionTitle/SectionTitle";
 import { useState } from "react";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import React from 'react';
+
+
+
 const defaultConfig = {
   license: "%LICENSE_KEY%",
 };

@@ -1,6 +1,7 @@
 import PrimaryBtn from "../../../Components/PrimaryButton/PrimaryBtn";
 import SectionTitle from "../../../Components/SectionTitle/SectionTitle";
 import contactUs from '../../../assets/contactUs.jpg'
+import React from 'react';
 
 const ContactUs = () => {
   return (

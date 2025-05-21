@@ -1,6 +1,7 @@
 import { Link, useLoaderData } from "react-router-dom";
 import SectionTitle from "../../Components/SectionTitle/SectionTitle";
 import PrimaryBtn from "../../Components/PrimaryButton/PrimaryBtn";
+import React from 'react';
 
 const BlogDetails = () => {
   const blog = useLoaderData();

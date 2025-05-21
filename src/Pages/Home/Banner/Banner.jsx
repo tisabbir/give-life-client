@@ -2,6 +2,9 @@ import { Link } from "react-router-dom";
 import PrimaryBtn from "../../../Components/PrimaryButton/PrimaryBtn";
 import SecondaryBtn from "../../../Components/SecondaryButton/SecondaryBtn";
 import banner from "../../../assets/banner.png";
+
+import React from 'react';
+
 const Banner = () => {
   return (
     <div className="pt-24">

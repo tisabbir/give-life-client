@@ -7,6 +7,7 @@ import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 import SecondaryBtn from "../../../Components/SecondaryButton/SecondaryBtn";
 import { useState } from "react";
+import React from 'react';
 
 
 const ContentManagement = () => {

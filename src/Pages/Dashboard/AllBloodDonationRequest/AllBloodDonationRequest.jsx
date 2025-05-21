@@ -1,5 +1,6 @@
 import { FaAddressBook, FaPenToSquare, FaTrash } from "react-icons/fa6";
 import SectionTitle from "../../../Components/SectionTitle/SectionTitle";
+import React from 'react';
 
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";

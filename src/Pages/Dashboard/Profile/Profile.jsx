@@ -7,6 +7,7 @@ import { useState } from "react";
 import Swal from "sweetalert2";
 import { updateProfile } from "firebase/auth";
 import auth from "../../../firebase/firebase.config";
+import React from 'react';
 
 const Profile = () => {
   const axiosSecure = useAxiosSecure();

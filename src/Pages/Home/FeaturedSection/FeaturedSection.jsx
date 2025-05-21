@@ -1,5 +1,6 @@
 import SectionTitle from "../../../Components/SectionTitle/SectionTitle";
 import { FaAward, FaHeartPulse, FaPeopleGroup, FaUserDoctor } from "react-icons/fa6";
+import React from 'react';
 
 
 const FeaturedSection = () => {
